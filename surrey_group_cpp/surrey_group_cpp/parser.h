@@ -23,7 +23,7 @@ public:
     parser();       //default constructor
     ~parser();      //default destructor
 
-    void splitByDelimiter(string inputFile);    //splits CSV into vector array
+    vector< vector<string> > splitByDelimiter(string inputFile);    //splits CSV into vector array
    // vector< vector<string> > getVector(vector< vector<string> > delimCSV);  //returns the vector array containing delimited CSV file
 
 };

@@ -17,7 +17,7 @@ parser::~parser()
 
 }
 
-void parser::splitByDelimiter(string inputFile)
+vector< vector<string> > parser::splitByDelimiter(string inputFile)
 {
     ifstream inputCSV(inputFile);
     
@@ -41,6 +41,7 @@ void parser::splitByDelimiter(string inputFile)
         cout << "\n";
     }
 
+    return delimCSV;
 }
 
 //vector< vector<string> > parser::getVector(vector< vector<string> >)
