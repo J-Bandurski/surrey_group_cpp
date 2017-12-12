@@ -7,14 +7,12 @@ int main()                  // first executed function
 {
     vector< vector<string> > testArray; //Creates a temporary array to house delimCSV from parser.
     testArray.empty();
-
+    
     parser newparse;
     testArray = newparse.splitByDelimiter("Dogs.csv");
-   
-    std::cout << std::endl << std::endl << testArray[0][Dad]; 
 
-
-
+    std::cout << std::endl << std::endl << testArray[4][6]; 
+    
     std::cin.get();         //don't close the window until user
     std::cin.get();         //input registered twice (enter)
 

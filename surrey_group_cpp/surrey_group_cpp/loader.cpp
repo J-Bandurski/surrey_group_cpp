@@ -9,7 +9,7 @@ using std::ifstream;
 
 loader::loader()    //default constructor, basic error handling
 {
-    cout << "No file has been loaded\nYou may have mistyped the name, or the file may not be located in the working directory";
+    //cout << "No file has been loaded\nYou may have mistyped the name, or the file may not be located in the working directory";
 }
 
 /*loader::loader(std::string csvFile)

@@ -9,7 +9,7 @@ using std::ifstream;
 
 parser::parser()
 {
-    cout << "No file has been loaded\n";
+    //cout << "No file has been loaded\n";
 }
 
 parser::~parser()
