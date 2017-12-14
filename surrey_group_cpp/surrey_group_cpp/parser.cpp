@@ -44,6 +44,14 @@ vector< vector<string> > parser::splitByDelimiter(string inputFile)
     return delimCSV;
 }
 
+
+/*
+void parser::searchParsed(vector< vector<string> > tokenArray, string userChoice)
+{
+
+
+}
+*/
 //vector< vector<string> > parser::getVector(vector< vector<string> >)
 //{
     

@@ -149,11 +149,13 @@
     <ClCompile Include="loader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="parser.cpp" />
+    <ClCompile Include="paternalTree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animalAttributes.h" />
     <ClInclude Include="loader.h" />
     <ClInclude Include="parser.h" />
+    <ClInclude Include="paternalTree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -23,8 +23,9 @@ public:
     parser();       //default constructor
     ~parser();      //default destructor
 
-    vector< vector<string> > splitByDelimiter(string inputFile);    //splits CSV into vector array
-   // vector< vector<string> > getVector(vector< vector<string> > delimCSV);  //returns the vector array containing delimited CSV file
+    vector< vector<string> > splitByDelimiter(string inputFile);                //splits CSV into vector array
+    // void searchParsed(vector< vector<string> > tokenArray, string userChoice);  //allows for search through tokenised array
+    // vector< vector<string> > getVector(vector< vector<string> > delimCSV);  //returns the vector array containing delimited CSV file
 
 };
 
