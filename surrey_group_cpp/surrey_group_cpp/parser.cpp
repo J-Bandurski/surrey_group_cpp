@@ -7,15 +7,9 @@ using std::cout;    //specifies which cout and cin we want
 using std::cin;     //to use, avoids "using namespace std" 
 using std::ifstream;
 
-parser::parser()
-{
-    //cout << "No file has been loaded\n";
-}
+parser::parser(){}
 
-parser::~parser()
-{
-
-}
+parser::~parser(){}
 
 vector< vector<string> > parser::splitByDelimiter(string inputFile)
 {
@@ -31,28 +25,18 @@ vector< vector<string> > parser::splitByDelimiter(string inputFile)
         }
         delimCSV.push_back(lineArray);
     }
-    //PRINTING HERE FOR TESTING, TO BE MOVED INTO GETVECTOR//
-    for (size_t i = 0; i<delimCSV.size(); ++i)
-    {
-        for (size_t j = 0; j<delimCSV[i].size(); ++j)
-        {
-            cout << delimCSV[i][j] << "|"; // (separate fields by |)
-        }
-        cout << "\n";
-    }
-
-    return delimCSV;
+   
+	return delimCSV;
 }
 
-
-/*
-void parser::searchParsed(vector< vector<string> > tokenArray, string userChoice)
+void parser::printParsed(vector< vector<string> > delimitedArray)
 {
-
-
+	for (size_t i = 0; i<delimCSV.size(); ++i)
+	{
+		for (size_t j = 0; j<delimCSV[i].size(); ++j)
+		{
+			cout << delimCSV[i][j] << " | "; // (separate fields by |)
+		}
+		cout << "\n";
+	}
 }
-*/
-//vector< vector<string> > parser::getVector(vector< vector<string> >)
-//{
-    
-//}
