@@ -36,12 +36,11 @@ int main()                  // first executed function
 	//arrays populated with tokenised versions of the CSV files. This could be done dynamically
 	//but the assignment specification seems to require static pre-loaded choices
 	//in order to load dynamically, replace "Dogs.csv" or similar with (<string>+".csv")
-	try {		//error handling
-		dogsArray = dogParser.splitByDelimiter("Dogs.csv");
-		catsArray = catParser.splitByDelimiter("Cats.csv");
-		horsesArray = horseParser.splitByDelimiter("Horses.csv");
-	}
-	catch (...) { cout << "An exception was thrown, likely by mistyped file name"; }
+	
+	dogsArray = dogParser.splitByDelimiter("Dogs.csv");
+	catsArray = catParser.splitByDelimiter("Cats.csv");
+	horsesArray = horseParser.splitByDelimiter("Horses.csv");
+
 	cout << "Please select the array you wish to display\nd = dogs, c = cats, h = horses, a = all\nTo print a paternal tree for a particular\nmember, type ''search'', then type <first letter of group> <name>\nFor example: d baby\n";
 	
 	//runtime loop
@@ -63,6 +62,18 @@ int main()                  // first executed function
 		{
 			cout << "\nPlease indicate member to search for\n";
 			cin >> searchChoice >> memberChoice;
+
+			try							//error handliong in case of incorrect input during search
+			{
+				if (searchChoice != "d" && searchChoice != "c" && searchChoice != "h" && searchChoice != "a")
+				{
+					throw searchChoice;
+				}
+			}
+			catch (string e)
+			{
+				cout << "Input was not valid: " << e << "Is not a valid argument" << std::endl;
+			}
 			
 			if (searchChoice == "d")
 			{
