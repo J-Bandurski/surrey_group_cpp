@@ -17,6 +17,7 @@ int main()                  // first executed function
 	parser dogParser;						//parsing into class instances
 	parser catParser;
 	parser horseParser;
+	parser allParser;
 
 	vector< vector<string> > dogsArray;		//dogs storage
 	dogsArray.empty();						//initialising empty vectors
@@ -27,21 +28,26 @@ int main()                  // first executed function
 
 	paternalTree searchTree;				//new paternal tree obj, used to call search functions
 
-	string userInput = "null";			//uninitialised variables are bad, mmkay?
+	string userInput = "null";				//uninitialised variables are bad, mmkay?
 	string searchChoice = "null";
-	string teststring;
+	string memberChoice = "null";
+	string keepString = "null";
 
 	//arrays populated with tokenised versions of the CSV files. This could be done dynamically
 	//but the assignment specification seems to require static pre-loaded choices
-	dogsArray = dogParser.splitByDelimiter("Dogs.csv");
-	catsArray = catParser.splitByDelimiter("Cats.csv");
-	horsesArray = horseParser.splitByDelimiter("Horses.csv");
-	
+	//in order to load dynamically, replace "Dogs.csv" or similar with (<string>+".csv")
+	try {		//error handling
+		dogsArray = dogParser.splitByDelimiter("Dogs.csv");
+		catsArray = catParser.splitByDelimiter("Cats.csv");
+		horsesArray = horseParser.splitByDelimiter("Horses.csv");
+	}
+	catch (...) { cout << "An exception was thrown, likely by mistyped file name"; }
 	cout << "Please select the array you wish to display\nd = dogs, c = cats, h = horses, a = all\nTo print a paternal tree for a particular\nmember, type ''search'', then type <first letter of group> <name>\nFor example: d baby\n";
 	
+	//runtime loop
 	while (userInput != "quit")
 	{
-		cin >> userInput;
+		cin >> userInput;		//selecting a letter displays appropriate array, a displays all three arrays
 
 		if (userInput == "d") { dogParser.printParsed(dogsArray); }
 		
@@ -49,87 +55,83 @@ int main()                  // first executed function
 
 		else if (userInput == "h") { horseParser.printParsed(horsesArray); }
 
-		else if (userInput == "a") {
-									 dogParser.printParsed(dogsArray);     cout << std::endl;
+		else if (userInput == "a") { dogParser.printParsed(dogsArray);     cout << std::endl;
 									 catParser.printParsed(catsArray);	   cout << std::endl;
 									 horseParser.printParsed(horsesArray); cout << std::endl;}
 
-		else if (userInput == "search")
+		else if (userInput == "search")	//search used to separate array printing from paternal tree searches
 		{
 			cout << "\nPlease indicate member to search for\n";
-			cin >> searchChoice >> teststring;
+			cin >> searchChoice >> memberChoice;
 			
 			if (searchChoice == "d")
 			{
+				while (memberChoice != "na")
+				{
+					cout << memberChoice << " <- ";
+					memberChoice = searchTree.printPaternalTree(dogsArray, memberChoice);
+				}
+			}
+
+			else if (searchChoice == "c")
+			{
+				while (memberChoice != "na")
+				{
+					cout << memberChoice << " <- ";
+					memberChoice = searchTree.printPaternalTree(catsArray, memberChoice);
+				}
+			}
+
+			else if (searchChoice == "h")
+			{
+				while (memberChoice != "na")
+				{
+					cout << memberChoice << " <- ";
+					memberChoice = searchTree.printPaternalTree(horsesArray, memberChoice);
+				}
+			}
+
+			if (searchChoice == "a")	//"a" is basically frankenstein's abortion, but it works!
+			{							//"a" queries all three arrays, displaying results for each.
+				keepString = memberChoice;	//keepstring used to store memberchoice, which is overwritten with some function calls
+
+				cout << "\nSearching in dogs: \n";
+				while (memberChoice != "na")
+				{
+					cout << memberChoice << " <- ";
+
+					memberChoice = searchTree.printPaternalTree(dogsArray, memberChoice);
+				}
+
+				cout << "[END]";
+				memberChoice = keepString;
+
+				cout << "\nSearching in cats: \n";
+				while (memberChoice != "na")
+				{
+					cout << memberChoice << " <- ";
+
+					memberChoice = searchTree.printPaternalTree(catsArray, memberChoice);
+				}
 				
+				cout << "[END]";
+				memberChoice = keepString;
+
+				cout << "\nSearching in horses: \n";
+				while (memberChoice != "na")
+				{
+					cout << memberChoice << " <- ";
+
+					memberChoice = searchTree.printPaternalTree(horsesArray, memberChoice);
+				}
+				cout << "[END]";
 			}
 
-			if (searchChoice == "c")
+			else
 			{
-
+				cout << "[END]";
 			}
-
-			if (searchChoice == "h")
-			{
-
-			}
-
-			if (searchChoice == "a")
-			{
-
-			}
-
 		}
-
 		else { cout << "\nPlease select a recognised input\n"; cout << std::endl; }
-
 	}
 }
-
-
-	/*
-
-	while (searchChoice != "na")
-	{
-		cout << searchChoice << " <- ";
-		searchChoice = searchTree.printPaternalTree(dogsArray, searchChoice);
-	}
-
-
-    parser newparse;    //creates a new parser to handle the tokenisation of the csv files.
-    
-    vector< vector<string> > testArray; //creates a temporary array to house delimCSV from parser.
-    
-
-    string newstringtest = "null"; //creates a string to house user input for choosing files
-    string searchchoice;
-    paternalTree newtree;
-
-    //UI
-    std::cout << "Please choose the file you wish to display;\nPlease avoid adding the file extension\ne.g.''dogs'' instead of ''dogs.csv''  \n";
-    std::cin >> (newstringtest);
-    
-   
-    testArray = newparse.splitByDelimiter(newstringtest+".csv");
-	newparse.printParsed(testArray);
-
-    cout << "\nPlease select the entity whose paternal tree you would like to display;\n";
-    cin >> searchchoice;
-    
-    while (searchchoice != "na")
-    {
-        cout << searchchoice << " <- ";
-        searchchoice = newtree.printPaternalTree(testArray, searchchoice);
-    }
-    
-   // cout << newtree.printPaternalTree(testArray, searchchoice);
-
-    //std::cout << std::endl << std::endl << testArray[4][6]; 
-    
-    cin.get();         //don't close the window until user
-    cin.get();         //input registered twice (enter)
-
-    system("PAUSE"); // for test purposes only, remove before sub!
-
-    return 0;
-}*/

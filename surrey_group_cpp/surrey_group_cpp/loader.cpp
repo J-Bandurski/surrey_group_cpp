@@ -41,6 +41,8 @@ loader::~loader()   //default destructor
 }
 
 //allows the user to quickly check the contents of a CSV file
+//somewhat similar to "splitByDelimiter" of ::parser, but does not tokenise the file
+//and only allows for display/printing.
 void loader::printcsv(std::string csvFile)
 {
     ifstream infile;
